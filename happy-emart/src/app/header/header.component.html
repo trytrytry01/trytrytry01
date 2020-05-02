@@ -1,0 +1,47 @@
+
+<nav class="navbar navbar-expand-md navbar bg-success">
+  <h2 class ="text-white">Happy eMart</h2>
+  <div class="collapse navbar-collapse" id="emart-nav-bar">	
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" >
+          <a class="nav-link  text-white" routerLink="/shopping-cart" >
+            <img class="img-thumbnail cart"
+            src="./assets/img/cart.jpg"
+            alt="image" />
+          </a>
+            <!-- <a class="nav-link  text-white" routerLink="/" *ngIf="!navBarToggle()">Login</a> -->
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link  text-white">logout</a>
+            <!-- <a class="nav-link  text-white" routerLink="/" *ngIf="!navBarToggle()">Login</a> -->
+        </li>
+      </ul>
+  </div>  
+</nav>
+<nav class="navbar navbar-expand-md navbar bg-success" style="margin-top: -15px;">
+
+  <div class="collapse navbar-collapse" id="emart-nav-bar">	
+      <ul class="navbar-nav m-auto">
+          <li class="nav-item" >
+            <a class="nav-link  text-white" routerLink="/items" >Search Item</a>
+              <!-- <a class="nav-link  text-white" routerLink="/" *ngIf="!navBarToggle()">Login</a> -->
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link  text-white" routerLink="/purchase-history" >Purchase History</a>
+              <!-- <a class="nav-link  text-white" routerLink="/item-list" *ngIf="navBarToggle()">Item List</a> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  text-white" routerLink="/" >View Discounts</a>
+              <!-- <a class="nav-link text-white" routerLink="/cart-list" *ngIf="navBarToggle()">Cart</a> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  text-white" routerLink="/" >Reports</a>
+            <!-- <a class="nav-link text-white" routerLink="/bill-list" *ngIf="navBarToggle()">Purchase History</a> -->
+          </li>
+          <li class="nav-item">
+              <!-- <a class="nav-link text-white" routerLink="/log-out" *ngIf="navBarToggle()">Logout</a> -->
+          </li>
+      </ul>
+  </div>
+  
+</nav>

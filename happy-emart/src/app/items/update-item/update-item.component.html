@@ -1,0 +1,29 @@
+<div class="container">
+  <p *ngFor="let alert of alerts">
+    <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+  </p>
+  <form [formGroup]="stockForm" class="form-signin" (ngSubmit)="onSubmit(stockForm.value)">
+    <table class="table table-striped" style="width: 70%;margin-top: 10px;">
+      <thead>
+      <!-- <tr>
+        <th scope="col">#</th>
+        <th scope="col">Country</th>
+        <th scope="col">Area</th>
+        <th scope="col">Population</th>
+      </tr> -->
+      </thead>
+      <tbody>
+      <!-- <tr *ngFor="let country of countries; index as i"> -->
+        <tr>
+          <td>Item1</td>
+          <td>Electronic</td>
+          <td>Mobile</td>
+          <td>
+            $<input formControlName="price1" type="text" class="form-control" placeholder="price">
+          </td>
+          <td><input formControlName="stock1" type="text" class="form-control"  placeholder="stock"></td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

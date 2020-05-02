@@ -1,0 +1,44 @@
+<!-- <div *ngIf="isEmpty"> -->
+  <div class="container">
+      <div class="row">
+          <div class="table-responsive m-5">
+              <h3>Cart List</h3>
+              <table class="table table-striped">
+                  <thead class="thead">
+                      <tr>
+                          <th>Item ID</th>
+                          <th>Item Name</th>
+                          <th>Item Price</th>
+                          <th>Item Count</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr >
+                          <td>item.itemId</td>
+                          <td>itemName1</td>
+                          <td>$1200</td>
+                          <td>2</td>
+                          <td><button class="btn btn-primary" style="float: right;margin-right: 10px;">delete</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="row m-2" style="width: 90%;">
+            <div class="table-responsive">
+              <button class="btn btn-success" style="float: right;">Checkout</button>
+              <button class="btn btn-primary" style="float: right;margin-right: 10px;">Apply Discount</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+  <div>
+  <!-- <div *ngIf="!isEmpty"> -->
+      <div class="row mt-5">
+          <div class="col-12 text-center">
+              <!-- <span class="display-4 text-dark">Shopping Cart is empty!</span> -->
+          </div>
+      </div>
+  </div>
