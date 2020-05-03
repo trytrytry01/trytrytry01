@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import{Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ShoppingCartService} from '../../services/shoppingCart.service';
+import {ItemService} from '../../services/item.service'
 
 export interface Item{
   id: string,
@@ -45,9 +47,21 @@ export class ItemDetailComponent implements OnInit {
   itemImage:string;
   item:any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    protected activatedRoute: ActivatedRoute,
+    private itemService: ItemService,
+    private cartService: ShoppingCartService) { }
 
   ngOnInit() {
+    // this.activatedRoute.paramMap.subscribe(
+    //   (param)=>{
+    //               let id = param.get('iId');  
+    //               this.itemService.getItem(id).subscribe((response)=> {
+    //                 this.item =  response;
+    //               }
+    //               );                                   
+    //             }
+    // );
     this.item = ITEM_DETAIL_dummy;
     this.toggleImg(1);
   }
@@ -68,11 +82,12 @@ export class ItemDetailComponent implements OnInit {
   }
 
   addToCart(item:any) {
-
+    this.cartService.addToCart(item);
+    this.router.navigate(['items']);
   }
 
   checkOut(item:any) {
-
+    // this.router.navigate(['bill-view']);
   }
 
 }

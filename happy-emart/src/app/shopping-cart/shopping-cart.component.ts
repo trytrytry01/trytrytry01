@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ShoppingCartService} from '../services/shoppingCart.service';
+import{Router} from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,9 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor() { }
+ 
+  cartItems: any;
+  isEmpty: boolean;
+  currentBuyer: any;
+  constructor(protected cartService:ShoppingCartService, protected router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    
+    this.cartItems = this.cartService.getAllCart();
+    
+    if(this.cartItems.length==0){
+      this.isEmpty=false;
+    }
+    else{
+      this.isEmpty=true;
+    }
+  }
+
+  deleteCartItem(itemNo: number){
+    this.cartItems = this.cartService.deleteCartItem(itemNo);
+    if(this.cartItems.length==0){
+      this.isEmpty=false;
+    }
+    else{
+      this.isEmpty=true;
+    }
+  }
+
+  checkOut(Items: any){
+    this.cartService.setAllCart(Items);
+    this.router.navigate(['bill-view']);
   }
 
 }
