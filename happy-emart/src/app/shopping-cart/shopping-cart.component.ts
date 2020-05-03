@@ -27,7 +27,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  deleteCartItem(itemNo: number){
+  deleteCartItem(itemNo: string){
     this.cartItems = this.cartService.deleteCartItem(itemNo);
     if(this.cartItems.length==0){
       this.isEmpty=false;

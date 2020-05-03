@@ -30,7 +30,7 @@ const ITEM_DETAIL_dummy: Item = {
   description: 'huawei P30 packs A13 Bionic, Portrait mode, 4K video, Touch ID, a Retina HD display, and great battery life into a 4.7” design',
   image1:'./assets/img/huawei P30.jpg',
   image2:'./assets/img/huawei P30 2.jpg',
-  image3:'./assets/img/huawei P30 3.jpg',
+  image3:'./assets/img/huawei P30 3.jpeg',
   image4:'./assets/img/huawei P30 4.jpg',
   stock: 1000,
   remarks:''
@@ -62,6 +62,7 @@ export class ItemDetailComponent implements OnInit {
     //               );                                   
     //             }
     // );
+    // let id = this.activatedRoute.snapshot.params['id'];
     this.item = ITEM_DETAIL_dummy;
     this.toggleImg(1);
   }

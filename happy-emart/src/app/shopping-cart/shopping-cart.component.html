@@ -14,12 +14,12 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr >
-                          <td>item.itemId</td>
-                          <td>itemName1</td>
-                          <td>$1200</td>
+                      <tr *ngFor="let item of cartItems">
+                          <td>{{item.id}}</td>
+                          <td>{{item.name}}</td>
+                          <td>{{item.price}}</td>
                           <td>2</td>
-                          <td><button class="btn btn-primary" style="float: right;margin-right: 10px;">delete</button></td>
+                          <td><button class="btn btn-primary" style="float: right;margin-right: 10px;" (click)="deleteCartItem(item.itemId)">delete</button></td>
                       </tr>
                   </tbody>
               </table>

@@ -25,7 +25,7 @@ addToCart(itemObj: any){
    this.cartItems = cartItems;
  }
 
- deleteCartItem(itemNo: number){
+ deleteCartItem(itemNo: string){
    let size = this.cartItems.length;
    for(let i=0;i<size;i++){
      if(this.cartItems[i].itemId==itemNo){

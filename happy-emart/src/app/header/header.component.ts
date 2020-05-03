@@ -13,8 +13,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  navBarType(){
-    // return userService.getLoginType;
+  islogged() {
+    return this.userService.isLogged();
+  }
+
+  isBuyerLogged() {
+    return this.userService.isBuyerLogged();
+  }
+
+  isSellerLogged() {
+    return this.userService.isSellerLogged();
   }
 
 }

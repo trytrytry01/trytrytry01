@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import { ROUTER_CONFIGURATION } from '@angular/router';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,10 +30,35 @@ export class UserService {
       return this.http.post(`${environment.baseUrl}/seller`, JSON.stringify(user), httpOptions);
     }
 
-    sellerLogout() {
-
+    logout() {
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('role');
     }
 
+    getLoginUserType() {
+      return sessionStorage.getItem('role');
+    }
 
+    isLogged() {
+      if(sessionStorage.getItem('token')) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    isBuyerLogged() {
+      if(sessionStorage.getItem('role') == 'buyer') {
+        return this.isLogged();
+      }
+      return false;
+    }
+
+    isSellerLogged() {
+      if(sessionStorage.getItem('role') == 'seller') {
+        return this.isLogged();
+      }
+      return false;
+    }
 
 }

@@ -47,25 +47,40 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(value: any) {
-    if (this.validInput(value)) {
-      this.userService.postSignIn(value).subscribe(
-        data => {
-          console.log(JSON.stringify(data));
-          const info: any = data;
-          if (200 === info.code) {
-              sessionStorage.setItem('token', info.result.token);
-              sessionStorage.setItem('role', value.role); 
-              this.router.navigate(['/products']);
-          } else {
-            this.alerts.push({type : 'danger', message: 'username or password error!'});
 
+
+    if (this.validInput(value)) {
+          //TODO:delete this code when the server code is completed
+          //---------------------------------//
+          sessionStorage.setItem('token', 'dummy test');
+          sessionStorage.setItem('role', value.role); 
+          if(value.role == 'seller') {
+            this.router.navigate(['/add-item']);
+          } else {
+            this.router.navigate(['/items']);
           }
-        },
-        error => {
-          console.error('An error occurred:', error.error.message);
-          this.alerts.push({type : 'danger', message: 'A server error occured!'});
-        } // error path
-      );
+          alert(value.role);
+          //---------------------------------//
+
+      //TODO:open the code when the server code is completed
+      // this.userService.postSignIn(value).subscribe(
+      //   data => {
+      //     console.log(JSON.stringify(data));
+      //     const info: any = data;
+      //     if (200 === info.code) {
+      //         sessionStorage.setItem('token', info.result.token);
+      //         sessionStorage.setItem('role', value.role); 
+      //         this.router.navigate(['/items']);
+      //     } else {
+      //       this.alerts.push({type : 'danger', message: 'username or password error!'});
+
+      //     }
+      //   },
+      //   error => {
+      //     console.error('An error occurred:', error.error.message);
+      //     this.alerts.push({type : 'danger', message: 'A server error occured!'});
+      //   } // error path
+      // );
     }
   }
 
