@@ -15,8 +15,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { AddItemComponent } from './items/add-item/add-item.component';
 import { UpdateItemComponent } from './items/update-item/update-item.component';
-import {ItemListComponent} from './items/item-list/item-list.component';
-import {ItemDetailComponent} from './items/item-detail/item-detail.component';
+import { ItemListComponent} from './items/item-list/item-list.component';
+import { ItemDetailComponent} from './items/item-detail/item-detail.component';
+import { ViewStockComponent} from './items/view-stock/view-stock.component';
 import { MoneyPipe } from './pipe/money.pipe'
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MoneyPipe } from './pipe/money.pipe'
       UpdateItemComponent,
       ItemListComponent,
       ItemDetailComponent,
+      ViewStockComponent,
       MoneyPipe
    ],
    imports: [

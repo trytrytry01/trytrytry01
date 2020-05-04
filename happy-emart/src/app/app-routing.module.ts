@@ -22,15 +22,13 @@ const routes: Routes = [
   { path: 'buyer/signup', component: BuyerSignupComponent},
   { path: 'seller/signup', component: SellerSignupComponent},
   { path: 'items', component: ItemListComponent, canActivate: [LoginGuard]},
-  { path: 'item-detail/:id', component: ItemDetailComponent},
-  { path: 'add-item', component: AddItemComponent},
-  { path: 'update-item', component: UpdateItemComponent},
-  { path: 'view-stock', component: ViewStockComponent},
-  { path: 'shopping-cart', component: ShoppingCartComponent},
-  { path: 'purchase-history', component: PurchaseHistoryComponent},
-  
-  // { path: 'products', component: ProductComponent, canActivate: [LoginGuard]},
-  // { path: 'product/:id', component: ProductDetailComponent, canActivate: [LoginGuard]}
+  { path: 'item-detail/:id', component: ItemDetailComponent, canActivate: [LoginGuard]},
+  { path: 'add-item', component: AddItemComponent, canActivate: [LoginGuard]},
+  { path: 'update-item', component: UpdateItemComponent, canActivate: [LoginGuard]},
+  { path: 'view-stock', component: ViewStockComponent, canActivate: [LoginGuard]},
+  { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [LoginGuard]},
+  { path: 'purchase-history', component: PurchaseHistoryComponent, canActivate: [LoginGuard]},
+
 ];
 
 @NgModule({

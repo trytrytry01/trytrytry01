@@ -3,6 +3,39 @@ import{Router} from '@angular/router';
 import {ItemService} from '../../services/item.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
+interface ProductItem {
+  id: string;
+  itemName:string;
+  category: string;
+  subCategory: string,
+  price: number;
+  stock: number;
+}
+
+const ITEMS: ProductItem[] = [{
+    id: '1',
+    itemName: 'Sumsung Galaxy S7',
+    category:'Electronic',
+    subCategory:'Mobile',
+    price: 1299,
+    stock:500,
+}, {
+  id: '2',
+  itemName: 'HUAWEI P30',
+  category:'Electronic',
+  subCategory:'Mobile',
+  price: 1599,
+  stock:500,
+  }, {
+    id: '3',
+    itemName: 'Sumsung Galaxy S10',
+    category:'Electronic',
+    subCategory:'Mobile',
+    price: 1599,
+    stock:500,
+    }
+];
+
 interface Alert {
   type: string;
   message: string;
@@ -20,18 +53,22 @@ export class UpdateItemComponent implements OnInit {
 
   stockForm;
   alerts: Alert[];
+  allItems:ProductItem[];
 
   constructor(
     private itemService: ItemService, 
     private router: Router,
     private formBuilder: FormBuilder,) { 
+      this.allItems = ITEMS;
       this.stockForm = this.formBuilder.group({
         price: '',
         stock:''
         })
     }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.allItems = ITEMS;
+   }
 
   onSubmit(value: any) {
     if (this.validInput(value)) {

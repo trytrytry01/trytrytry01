@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', 'dummy test');
           sessionStorage.setItem('role', value.role); 
           if(value.role == 'seller') {
-            this.router.navigate(['/add-item']);
+            this.router.navigate(['/view-stock']);
           } else {
             this.router.navigate(['/items']);
           }

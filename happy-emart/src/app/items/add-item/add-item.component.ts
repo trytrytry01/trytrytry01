@@ -31,7 +31,7 @@ export class AddItemComponent implements OnInit {
         })
     }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   onSubmit(value: any) {
     if (this.validInput(value)) {

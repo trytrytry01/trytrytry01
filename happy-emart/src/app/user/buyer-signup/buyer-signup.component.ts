@@ -71,12 +71,12 @@ export class BuyerSignupComponent implements OnInit {
       result =  false;
     }
 
-    if (!value.password2) {
+    if (!value.confirmPassword) {
       this.alerts.push({type : 'danger', message: 'confirm password is required!'});
       result =  false;
     }
 
-    if (value.password != value.password2) {
+    if (value.password != value.confirmPassword) {
       this.alerts.push({type : 'danger', message: 'the confirm password is different with the password!'});
       result =  false;
     }
