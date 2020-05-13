@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">buyer-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.buyer.entity</a> &gt; <span class="el_source">CartItem.java</span></div><h1>CartItem.java</h1><pre class="source lang-java linenums">package com.emart.buyer.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.Id;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @Description  
+ * @Author  ljg
+ * @Date 2020/05/05 
+ */
+
+@Entity
+@Table ( name =&quot;cart&quot;)
+<span class="fc" id="L26">public class CartItem  implements Serializable {</span>
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * id
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+   	@Column(name = &quot;id&quot; )
+	private Long id;
+
+	/**
+	 * buyer id
+	 */
+   	@Column(name = &quot;buyer_id&quot; )
+	private Long buyerId;
+
+	
+	/**
+	 * item id
+	 */
+   	@Column(name = &quot;item_id&quot; )
+	private Long itemId;
+   	
+	/**
+	 * item name
+	 */
+   	@Transient
+	private String itemName;
+   	
+	/**
+	 * number of items
+	 */
+   	@Column(name = &quot;number_of_items&quot; )
+	private Integer numberOfItems;
+   	
+	/**
+	 * created time
+	 */
+   	@Column(name = &quot;created_time&quot; )
+	private Date createdDateTime;
+   	
+	public Long getId() {
+<span class="fc" id="L70">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="fc" id="L74">		this.id = id;</span>
+<span class="fc" id="L75">	}</span>
+
+	public Long getBuyerId() {
+<span class="fc" id="L78">		return buyerId;</span>
+	}
+
+	public void setBuyerId(Long buyerId) {
+<span class="fc" id="L82">		this.buyerId = buyerId;</span>
+<span class="fc" id="L83">	}</span>
+
+	public Long getItemId() {
+<span class="fc" id="L86">		return itemId;</span>
+	}
+
+	public void setItemId(Long itemId) {
+<span class="fc" id="L90">		this.itemId = itemId;</span>
+<span class="fc" id="L91">	}</span>
+
+	public String getItemName() {
+<span class="fc" id="L94">		return itemName;</span>
+	}
+
+	public void setItemName(String itemName) {
+<span class="fc" id="L98">		this.itemName = itemName;</span>
+<span class="fc" id="L99">	}</span>
+
+	public Integer getNumberOfItems() {
+<span class="fc" id="L102">		return numberOfItems;</span>
+	}
+
+	public void setNumberOfItems(Integer numberOfItems) {
+<span class="fc" id="L106">		this.numberOfItems = numberOfItems;</span>
+<span class="fc" id="L107">	}</span>
+
+	public Date getCreatedDateTime() {
+<span class="fc" id="L110">		return createdDateTime;</span>
+	}
+
+	public void setCreatedDateTime(Date createdDateTime) {
+<span class="fc" id="L114">		this.createdDateTime = createdDateTime;</span>
+<span class="fc" id="L115">	}</span>
+
+//	@Override
+//	public String toString() {
+//		return &quot;{&quot; +
+//					&quot;id='&quot; + id + '\'' +
+//					&quot;buyerId='&quot; + buyerId + '\'' +
+//					&quot;itemId='&quot; + itemId + '\'' +
+//					&quot;numberOfItems='&quot; + numberOfItems + '\'' +
+//					&quot;createdDateTime='&quot; + createdDateTime + '\'' +
+//				'}';
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

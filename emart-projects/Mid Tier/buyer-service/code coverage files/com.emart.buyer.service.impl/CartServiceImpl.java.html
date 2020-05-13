@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CartServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">buyer-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.buyer.service.impl</a> &gt; <span class="el_source">CartServiceImpl.java</span></div><h1>CartServiceImpl.java</h1><pre class="source lang-java linenums">package com.emart.buyer.service.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.emart.buyer.dao.CartItemDao;
+import com.emart.buyer.dao.PurchaseHistoryDao;
+import com.emart.buyer.entity.CartItem;
+import com.emart.buyer.entity.PurchaseHistory;
+import com.emart.buyer.service.CartService;
+
+@Service
+<span class="fc" id="L17">public class CartServiceImpl implements CartService {</span>
+
+	@Autowired
+	private CartItemDao cartItemDao;
+	
+	@Autowired
+	private PurchaseHistoryDao purchaseHistoryDao;
+    
+	@Override
+	public void addcartItems(CartItem cartItem) {
+<span class="fc" id="L27">		cartItem.setCreatedDateTime(new Date());</span>
+<span class="fc" id="L28">		cartItemDao.save(cartItem);</span>
+<span class="fc" id="L29">	}</span>
+
+	@Override
+	public List&lt;CartItem&gt; viewCartItems(Long buyerId) {
+<span class="fc" id="L33">		return cartItemDao.findByBuyerId(buyerId);</span>
+	}
+
+	@Override
+	public void deleteCartItems(Long id) {
+<span class="fc" id="L38">		cartItemDao.deleteById(id);;</span>
+<span class="fc" id="L39">	}</span>
+
+	@Override
+	public void checkoutItems(List&lt;CartItem&gt; cartItemList, Long transactionId) {
+		// delete cart item list
+<span class="fc" id="L44">		cartItemDao.deleteAll(cartItemList);</span>
+		
+		//save Purchase History
+<span class="fc" id="L47">    	List&lt;PurchaseHistory&gt; purchaseHistoryList = new ArrayList&lt;PurchaseHistory&gt;();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">    	for(CartItem cartItem : cartItemList) {</span>
+<span class="fc" id="L49">    		PurchaseHistory purchaseHistory = new PurchaseHistory();</span>
+<span class="fc" id="L50">    		purchaseHistory.setBuyerId(cartItem.getBuyerId());</span>
+<span class="fc" id="L51">    		purchaseHistory.setItemId(cartItem.getItemId());</span>
+<span class="fc" id="L52">    		purchaseHistory.setNumberOfItems(cartItem.getNumberOfItems());</span>
+<span class="fc" id="L53">    		purchaseHistory.setTransactionId(transactionId);</span>
+<span class="fc" id="L54">    		purchaseHistory.setPurchaseDatetime(new Date());</span>
+<span class="fc" id="L55">    		purchaseHistoryList.add(purchaseHistory);</span>
+    	}
+<span class="fc" id="L57">		purchaseHistoryDao.saveAll(purchaseHistoryList);</span>
+<span class="fc" id="L58">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

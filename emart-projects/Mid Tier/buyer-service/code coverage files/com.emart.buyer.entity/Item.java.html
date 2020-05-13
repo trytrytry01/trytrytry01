@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Item.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">buyer-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.buyer.entity</a> &gt; <span class="el_source">Item.java</span></div><h1>Item.java</h1><pre class="source lang-java linenums">package com.emart.buyer.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * @Description  
+ * @Author  ljg
+ * @Date 2020/05/05 
+ */
+
+@Entity
+@Table ( name =&quot;items&quot;)
+<span class="fc" id="L26">public class Item  implements Serializable {</span>
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * primary key ID
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+   	@Column(name = &quot;id&quot; )
+	private Long id;
+
+	/**
+	 * item name
+	 */
+   	@Column(name = &quot;item_name&quot; )
+	private String itemName;
+   	
+	/**
+	 * seller id
+	 */
+   	@Column(name = &quot;seller_id&quot; )
+	private Long sellerId;
+
+	/**
+	 * category id
+	 */
+   	@Column(name = &quot;category_id&quot; )
+	private Long categoryId;
+   	
+	/**
+	 * sub category id
+	 */
+   	@Column(name = &quot;subcategory_id&quot; )
+	private Long subcategoryId;
+
+	/**
+	 * price
+	 */
+   	@Column(name = &quot;price&quot; )
+	private String price;
+   	
+	/**
+	 * description
+	 */
+   	@Column(name = &quot;description&quot; )
+	private String description;
+   	
+	/**
+	 * stockNumber
+	 */
+   	@Column(name = &quot;stock_number&quot; )
+	private Long stockNumber;
+   	
+	/**
+	 * remarks
+	 */
+   	@Column(name = &quot;remarks&quot; )
+	private String remarks;
+   	
+	public Long getId() {
+<span class="fc" id="L87">		return this.id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="nc" id="L91">		this.id = id;</span>
+<span class="nc" id="L92">	}</span>
+
+	public String getItemName() {
+<span class="fc" id="L95">		return itemName;</span>
+	}
+
+	public void setItemName(String itemName) {
+<span class="nc" id="L99">		this.itemName = itemName;</span>
+<span class="nc" id="L100">	}</span>
+
+	public Long getSellerId() {
+<span class="fc" id="L103">		return sellerId;</span>
+	}
+
+	public void setSellerId(Long sellerId) {
+<span class="nc" id="L107">		this.sellerId = sellerId;</span>
+<span class="nc" id="L108">	}</span>
+
+	public Long getCategoryId() {
+<span class="fc" id="L111">		return categoryId;</span>
+	}
+
+	public void setCategoryId(Long categoryId) {
+<span class="nc" id="L115">		this.categoryId = categoryId;</span>
+<span class="nc" id="L116">	}</span>
+
+	public Long getSubcategoryId() {
+<span class="fc" id="L119">		return subcategoryId;</span>
+	}
+
+	public void setSubcategoryId(Long subcategoryId) {
+<span class="nc" id="L123">		this.subcategoryId = subcategoryId;</span>
+<span class="nc" id="L124">	}</span>
+
+	public String getPrice() {
+<span class="fc" id="L127">		return price;</span>
+	}
+
+	public void setPrice(String price) {
+<span class="nc" id="L131">		this.price = price;</span>
+<span class="nc" id="L132">	}</span>
+
+	public String getDescription() {
+<span class="fc" id="L135">		return description;</span>
+	}
+
+	public void setDescription(String description) {
+<span class="nc" id="L139">		this.description = description;</span>
+<span class="nc" id="L140">	}</span>
+
+	public Long getStockNumber() {
+<span class="fc" id="L143">		return stockNumber;</span>
+	}
+
+	public void setStockNumber(Long stockNumber) {
+<span class="nc" id="L147">		this.stockNumber = stockNumber;</span>
+<span class="nc" id="L148">	}</span>
+
+	public String getRemarks() {
+<span class="fc" id="L151">		return remarks;</span>
+	}
+
+	public void setRemarks(String remarks) {
+<span class="nc" id="L155">		this.remarks = remarks;</span>
+<span class="nc" id="L156">	}</span>
+
+//	@Override
+//	public String toString() {
+//		return &quot;{&quot; +
+//					&quot;id='&quot; + id + '\'' +
+//					&quot;itemName='&quot; + itemName + '\'' +
+//					&quot;sellerId='&quot; + sellerId + '\'' +
+//					&quot;categoryId='&quot; + categoryId + '\'' +
+//					&quot;subcategoryId='&quot; + subcategoryId + '\'' +
+//					&quot;price='&quot; + price + '\'' +
+//					&quot;description='&quot; + description + '\'' +
+//					&quot;remarks='&quot; + remarks + '\'' +
+//				'}';
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

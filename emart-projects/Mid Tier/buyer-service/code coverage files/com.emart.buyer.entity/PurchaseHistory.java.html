@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PurchaseHistory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">buyer-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.buyer.entity</a> &gt; <span class="el_source">PurchaseHistory.java</span></div><h1>PurchaseHistory.java</h1><pre class="source lang-java linenums">package com.emart.buyer.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * @Description  
+ * @Author  ljg
+ * @Date 2020/05/05 
+ */
+
+@Entity
+@Table ( name =&quot;purchase_history&quot;)
+<span class="fc" id="L20">public class PurchaseHistory  implements Serializable {</span>
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * id
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+   	@Column(name = &quot;id&quot; )
+	private Long id;
+
+	/**
+	 * buyer id
+	 */
+   	@Column(name = &quot;buyer_id&quot; )
+	private Long buyerId;
+
+	/**
+	 * transaction id
+	 */
+   	@Column(name = &quot;transaction_id&quot; )
+	private Long transactionId;
+
+	/**
+	 * item id
+	 */
+   	@Column(name = &quot;item_id&quot; )
+	private Long itemId;
+   	
+	/**
+	 * number of items
+	 */
+   	@Column(name = &quot;number_of_items&quot; )
+	private Integer numberOfItems;
+   	
+	/**
+	 * purchase date time
+	 */
+   	@Column(name = &quot;purchase_datetime&quot; )
+	private Date purchaseDatetime;
+   	
+	/**
+	 * remarks
+	 */
+   	@Column(name = &quot;remarks&quot; )
+	private String remarks;
+
+
+	public Long getId() {
+<span class="fc" id="L70">		return id;</span>
+	}
+
+	public void setId(Long id) {
+<span class="nc" id="L74">		this.id = id;</span>
+<span class="nc" id="L75">	}</span>
+
+	public Long getBuyerId() {
+<span class="nc" id="L78">		return buyerId;</span>
+	}
+
+	public void setBuyerId(Long buyerId) {
+<span class="fc" id="L82">		this.buyerId = buyerId;</span>
+<span class="fc" id="L83">	}</span>
+
+	public Long getTransactionId() {
+<span class="nc" id="L86">		return transactionId;</span>
+	}
+
+	public void setTransactionId(Long transactionId) {
+<span class="fc" id="L90">		this.transactionId = transactionId;</span>
+<span class="fc" id="L91">	}</span>
+
+	public Long getItemId() {
+<span class="nc" id="L94">		return itemId;</span>
+	}
+
+	public void setItemId(Long itemId) {
+<span class="fc" id="L98">		this.itemId = itemId;</span>
+<span class="fc" id="L99">	}</span>
+
+	public Integer getNumberOfItems() {
+<span class="nc" id="L102">		return numberOfItems;</span>
+	}
+
+	public void setNumberOfItems(Integer numberOfItems) {
+<span class="fc" id="L106">		this.numberOfItems = numberOfItems;</span>
+<span class="fc" id="L107">	}</span>
+
+	public Date getPurchaseDatetime() {
+<span class="nc" id="L110">		return purchaseDatetime;</span>
+	}
+
+	public void setPurchaseDatetime(Date purchaseDatetime) {
+<span class="fc" id="L114">		this.purchaseDatetime = purchaseDatetime;</span>
+<span class="fc" id="L115">	}</span>
+
+	public String getRemarks() {
+<span class="nc" id="L118">		return remarks;</span>
+	}
+
+	public void setRemarks(String remarks) {
+<span class="nc" id="L122">		this.remarks = remarks;</span>
+<span class="nc" id="L123">	}</span>
+
+//	@Override
+//	public String toString() {
+//		return &quot;{&quot; +
+//					&quot;categoryId='&quot; + id + '\'' +
+//					&quot;buyerId='&quot; + buyerId + '\'' +
+//					&quot;transactionId='&quot; + transactionId + '\'' +
+//					&quot;itemId='&quot; + itemId + '\'' +
+//					&quot;numberOfItems='&quot; + numberOfItems + '\'' +
+//					&quot;purchaseDatetime='&quot; + purchaseDatetime + '\'' +
+//					&quot;remarks='&quot; + remarks + '\'' +
+//				'}';
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

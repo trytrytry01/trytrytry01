@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">seller-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.seller.service.impl</a> &gt; <span class="el_source">ItemServiceImpl.java</span></div><h1>ItemServiceImpl.java</h1><pre class="source lang-java linenums">package com.emart.seller.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.emart.seller.dao.ItemDao;
+import com.emart.seller.entity.Item;
+import com.emart.seller.service.ItemService;
+
+@Service
+<span class="fc" id="L14">public class ItemServiceImpl implements ItemService {</span>
+
+	@Autowired
+	private ItemDao itemDao;
+    
+	@Override
+	public void addItem(Item item) {
+<span class="fc" id="L21">		itemDao.save(item);</span>
+<span class="fc" id="L22">	}</span>
+
+	@Override
+	public void updateItem(List&lt;Item&gt; itemList) {
+		
+<span class="fc bfc" id="L27" title="All 2 branches covered.">		for(Item item : itemList) {</span>
+<span class="fc" id="L28">			Item itemTemp = itemDao.getOne(item.getId());</span>
+			//reset the update object itemList,so that no column can be updated except the price and stock
+<span class="fc" id="L30">			item.setItemName(itemTemp.getItemName());</span>
+<span class="fc" id="L31">			item.setCategoryId(itemTemp.getCategoryId());</span>
+<span class="fc" id="L32">			item.setSubcategoryId(itemTemp.getSubcategoryId());</span>
+<span class="fc" id="L33">			item.setSellerId(itemTemp.getSellerId());</span>
+<span class="fc" id="L34">			item.setRemarks(itemTemp.getRemarks());</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">			if(item.getPrice() == null) {</span>
+<span class="fc" id="L36">				item.setPrice(itemTemp.getPrice());</span>
+			}
+<span class="fc bfc" id="L38" title="All 2 branches covered.">			if(item.getStockNumber() == null) {</span>
+<span class="fc" id="L39">				item.setStockNumber(itemTemp.getStockNumber());</span>
+			}
+		}
+		
+<span class="fc" id="L43">		itemDao.saveAll(itemList);</span>
+<span class="fc" id="L44">	}</span>
+
+	@Override
+	public List&lt;Item&gt; viewItems(Long sellerId) {
+<span class="fc" id="L48">		return itemDao.findBySellerId(sellerId);</span>
+	}
+
+	@Override
+	public void deleteItems(List&lt;Item&gt; idList) {
+<span class="fc" id="L53">		itemDao.deleteAll(idList);;</span>
+<span class="fc" id="L54">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

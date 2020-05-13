@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">seller-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.seller.controller</a> &gt; <span class="el_source">ItemController.java</span></div><h1>ItemController.java</h1><pre class="source lang-java linenums">package com.emart.seller.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.emart.seller.entity.Item;
+import com.emart.seller.pojo.Result;
+import com.emart.seller.service.ItemService;
+
+@RestController
+@RequestMapping(value=&quot;/api/items&quot;)
+<span class="fc" id="L24">public class ItemController {</span>
+	
+	@Autowired
+	private ItemService itemService;
+	
+//    @Autowired
+//    private JwtTokenUtil jwtTokenUtil;
+//    
+//    private RestTemplate restTemplate = new RestTemplate();
+    
+    /**
+     * seller add items
+     */
+    @PostMapping
+    public Result addItem(HttpServletRequest request, @RequestBody Item item) {
+
+<span class="fc" id="L40">    	Result result = new Result();</span>
+    	
+<span class="fc" id="L42">    	this.checkItem(item, result);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">    	if(result.getMessages().size() &gt; 0) {</span>
+<span class="fc" id="L44">    		result.setStatusCode(HttpStatus.BAD_REQUEST.value());</span>
+<span class="fc" id="L45">    		return result;</span>
+    	}
+    	
+//    	String token = request.getHeader(&quot;Authorization&quot;);    	
+//    	String sellerName = jwtTokenUtil.getUsernameFromToken(token);
+//    	String userUrl = &quot;http://localhost:8081/api/user/seller?username=&quot; + sellerName;
+//    	Long sellerId = restTemplate.getForObject(userUrl, Long.class);
+//    	item.setSellerId(sellerId);
+
+<span class="fc" id="L54">        itemService.addItem(item);</span>
+
+<span class="fc" id="L56">        result.setStatusCode(HttpStatus.OK.value());</span>
+
+<span class="fc" id="L58">        return result;</span>
+    }
+    
+    /**
+     * seller update items(update stock and price)
+     */
+    @PutMapping
+    public Result updateItem(@RequestBody List&lt;Item&gt; itemList) {
+    	
+<span class="fc" id="L67">    	Result result = new Result();</span>
+
+<span class="fc" id="L69">        itemService.updateItem(itemList);</span>
+        
+<span class="fc" id="L71">        result.setStatusCode(HttpStatus.OK.value());</span>
+        
+<span class="fc" id="L73">        return result;</span>
+    }
+    
+    /**
+     * seller view stock 
+     */
+    @GetMapping
+    public Result getItems(Long sellerId) {
+    	
+<span class="fc" id="L82">    	Result result = new Result();</span>
+    	
+//    	String token = request.getHeader(&quot;Authorization&quot;);
+//    	String sellerName = jwtTokenUtil.getUsernameFromToken(token);    	
+//    	String userUrl = &quot;http://localhost:8081/api/user/seller?username=&quot; + sellerName;
+//    	Long sellerId = restTemplate.getForObject(userUrl, Long.class);
+        
+<span class="fc" id="L89">        List&lt;Item&gt; itemList = itemService.viewItems(sellerId);</span>
+        
+<span class="fc" id="L91">        result.setCount(itemList.size());</span>
+<span class="fc" id="L92">        result.setData(itemList);</span>
+<span class="fc" id="L93">        result.setStatusCode(HttpStatus.OK.value());</span>
+        
+<span class="fc" id="L95">        return result;</span>
+    }
+    
+    /**
+     * seller delete items 
+     */
+    @DeleteMapping
+    public Result deleteItems(@RequestBody List&lt;Item&gt; itemList) {
+    	
+<span class="fc" id="L104">    	Result result = new Result();</span>
+<span class="fc" id="L105">        itemService.deleteItems(itemList);</span>
+<span class="fc" id="L106">        result.setStatusCode(HttpStatus.OK.value());</span>
+        
+<span class="fc" id="L108">        return result;</span>
+    }
+    
+	private void checkItem(Item item, Result result) {
+<span class="fc" id="L112">		ArrayList&lt;String&gt; messages = result.getMessages();</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">		if(item.getItemName() == null) {</span>
+<span class="fc" id="L114">			messages.add(&quot;itemName is required!&quot;);</span>
+		}
+		
+<span class="fc bfc" id="L117" title="All 2 branches covered.">		if(item.getCategoryId() == null) {</span>
+<span class="fc" id="L118">			messages.add(&quot;categoryId is required!&quot;);</span>
+		}
+		
+<span class="fc bfc" id="L121" title="All 2 branches covered.">		if(item.getSubcategoryId() == null) {</span>
+<span class="fc" id="L122">			messages.add(&quot;subcategoryId is required!&quot;);</span>
+		}
+		
+<span class="fc bfc" id="L125" title="All 2 branches covered.">		if(item.getPrice() == null) {</span>
+<span class="fc" id="L126">			messages.add(&quot;proce is required!&quot;);</span>
+		}
+		
+<span class="fc" id="L129">		result.setMessages(messages);</span>
+		
+<span class="fc" id="L131">	}</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

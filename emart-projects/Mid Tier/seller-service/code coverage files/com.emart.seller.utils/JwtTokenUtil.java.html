@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtTokenUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">seller-service</a> &gt; <a href="index.source.html" class="el_package">com.emart.seller.utils</a> &gt; <span class="el_source">JwtTokenUtil.java</span></div><h1>JwtTokenUtil.java</h1><pre class="source lang-java linenums">package com.emart.seller.utils;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+//import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * JWT 工具类
+ */
+@Component
+<span class="fc" id="L19">public class JwtTokenUtil implements Serializable {</span>
+
+    private static final String CLAIM_KEY_USERNAME = &quot;sub&quot;;
+
+    /**
+     * exporation time: 30 minutes
+     */
+    private static final long EXPIRATION_TIME = 1800000;
+    /**
+     * JWT SECRET
+     */
+    private static final String SECRET = &quot;secret_fullstack&quot;;
+
+//    /**
+//     * issue JWT
+//     */
+//    public String generateToken(UserDetails userDetails) {
+//        Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;(16);
+//        claims.put( CLAIM_KEY_USERNAME, userDetails.getUsername() );
+//        return Jwts.builder()
+//                .setClaims( claims )
+//                .setExpiration( new Date( Instant.now().toEpochMilli() + EXPIRATION_TIME  ) )
+//                .signWith( SignatureAlgorithm.HS512, SECRET )
+//                .compact();
+//    }
+
+//    /**
+//     * validate JWT
+//     */
+//    public Boolean validateToken(String token, UserDetails userDetails) {
+//        String username = getUsernameFromToken( token );
+//
+//        return (username.equals( user.getUsername() ) &amp;&amp; !isTokenExpired( token ));
+//    }
+
+    /**
+     * check the token Expiration
+     */
+    public Boolean isTokenExpired(String token) {
+<span class="nc" id="L58">        Date expiration = getExpirationFromToken( token );</span>
+<span class="nc" id="L59">        return expiration.before(new Date());</span>
+    }
+
+    /**
+     * get username from token
+     */
+    public String getUsernameFromToken(String token) {
+<span class="nc" id="L66">        String username = getClaimsFromToken( token ).getSubject();</span>
+<span class="nc" id="L67">        return username;</span>
+    }
+
+    /**
+     * get the Expiration time of token
+     */
+    public Date getExpirationFromToken(String token) {
+<span class="nc" id="L74">        Date expiration = getClaimsFromToken( token ).getExpiration();</span>
+<span class="nc" id="L75">        return expiration;</span>
+    }
+
+    /**
+     * decode the JWT
+     */
+    private Claims getClaimsFromToken(String token) {
+<span class="nc" id="L82">        Claims claims = Jwts.parser()</span>
+<span class="nc" id="L83">                .setSigningKey( SECRET )</span>
+<span class="nc" id="L84">                .parseClaimsJws( token )</span>
+<span class="nc" id="L85">                .getBody();</span>
+<span class="nc" id="L86">        return claims;</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
