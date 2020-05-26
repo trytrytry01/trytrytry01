@@ -15,25 +15,11 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemDao itemDao;
     
-	@Override
-	public void addItem(Item item) {
-		itemDao.save(item);
-	}
-
-	@Override
-	public void updateItem(List<Item> itemList) {
-		itemDao.saveAll(itemList);
-	}
 
 	@Override
 	public List<Item> searchItems(String keyWords) {
 		keyWords = "%" + keyWords + "%";
 		return itemDao.searchItems(keyWords);
-	}
-
-	@Override
-	public void deleteItems(List<Item> idList) {
-		itemDao.deleteAll(idList);;
 	}
 
 }

@@ -107,7 +107,7 @@ public class CartControllerTest {
 	@Test
 	public void testDeletecartItems() throws Exception {
 		
-		this.mvc.perform(delete("/api/cart/6")).andExpect(status().isOk())
+		this.mvc.perform(delete("/api/cart/8")).andExpect(status().isOk())
 		                .andReturn().getResponse().getContentAsString();;
 	}
 	

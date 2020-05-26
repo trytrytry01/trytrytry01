@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -47,10 +48,22 @@ public class Item  implements Serializable {
 	private Long categoryId;
    	
 	/**
+	 * category name
+	 */
+   	@Transient
+	private String categoryName;
+   	
+	/**
 	 * sub category id
 	 */
    	@Column(name = "subcategory_id" )
 	private Long subcategoryId;
+   	
+	/**
+	 * sub category name
+	 */
+   	@Transient
+	private String subcategoryName;
 
 	/**
 	 * price
@@ -147,6 +160,23 @@ public class Item  implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getSubcategoryName() {
+		return subcategoryName;
+	}
+
+	public void setSubcategoryName(String subcategoryName) {
+		this.subcategoryName = subcategoryName;
+	}
+
 
 //	@Override
 //	public String toString() {

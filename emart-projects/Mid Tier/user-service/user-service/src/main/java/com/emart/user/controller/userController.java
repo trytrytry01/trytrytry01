@@ -4,10 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,22 +22,35 @@ import com.emart.user.utils.CheckUtil;
 import antlr.collections.List;
 
 @RestController
-@RequestMapping(value="/api/user")
 public class userController {
 
     @Autowired
     private UserService userService;
     
-    @Autowired
-    private UserDetailsService userDetailsService;
-    
     /**
-     * get user info
+     * user login
+     * return a Result with generated JWT when success
      */
     @PostMapping(value = "/login")
-    public String login(@RequestBody User user) throws AuthenticationException {
-        // return a JWT when success
-        return userService.login(user);
+    public Result login(@RequestBody User user) {
+
+    	Result result = new Result();
+    	
+    	String jwt = userService.login(user);
+    	if(jwt == null) {
+    		//user is not exist or the password is wrong
+    		ArrayList<String> msgList = new ArrayList<String>();
+    		msgList.add("user is not exist or the password is wrong");
+    		result.setMessages(msgList);
+    		result.setStatusCode(HttpStatus.BAD_REQUEST.value());
+    	} else {
+            // return a JWT when success
+        	result.setData(jwt);        	
+        	result.setStatusCode(HttpStatus.OK.value());
+    	}
+ 	
+        // return a Result with generated JWT data when success
+        return result;
     }
     
     /**
@@ -57,7 +68,7 @@ public class userController {
     	}
 
     	//check the duplicate of username
-    	UserDetails user = userDetailsService.loadUserByUsername(buyer.getUsername());
+    	User user = userService.getUserInfo(buyer.getUsername());
     	if(user != null) {
     		result.getMessages().add("the username has been used!");
     	}
@@ -88,7 +99,7 @@ public class userController {
     	}
     	
     	//check the duplicate of username
-    	UserDetails user = userDetailsService.loadUserByUsername(seller.getUsername());
+    	User user = userService.getUserInfo(seller.getUsername());
     	if(user != null) {
     		result.getMessages().add("the username has been used!");
     	}
@@ -106,22 +117,31 @@ public class userController {
     }
     
     /**
-     * get buyer user id by username
+     * get user info by username
      */
-    @GetMapping(value = "/buyer")
-    public Long getBuyerId(String username) throws AuthenticationException {
-        // return a JWT when success
-        return userService.getBuyerId(username);
+    @GetMapping(value = "/user")
+    public User getUserInfo(String username) {
+        // return user info
+        return userService.getUserInfo(username);
     }
     
-    /**
-     * get seller user id by username
-     */
-    @GetMapping(value = "/seller")
-    public Long getSellerId(String username) throws AuthenticationException {
-        // return a JWT when success
-        return userService.getSellerId(username);
-    }
+//    /**
+//     * get buyer user id by username
+//     */
+//    @GetMapping(value = "/buyer")
+//    public Long getBuyerId(String username) {
+//        // return a JWT when success
+//        return userService.getBuyerId(username);
+//    }
+//    
+//    /**
+//     * get seller user id by username
+//     */
+//    @GetMapping(value = "/seller")
+//    public Long getSellerId(String username) {
+//        // return a JWT when success
+//        return userService.getSellerId(username);
+//    }
     
 
 	private void checkBuyerInfo(Buyer buyer, Result result) {

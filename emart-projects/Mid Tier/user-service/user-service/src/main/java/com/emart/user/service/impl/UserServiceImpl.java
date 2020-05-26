@@ -5,21 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import com.emart.user.dao.BuyerDao;
+import com.emart.user.dao.RoleDao;
 import com.emart.user.dao.SellerDao;
 import com.emart.user.entity.Buyer;
+import com.emart.user.entity.Role;
 import com.emart.user.entity.Seller;
 import com.emart.user.entity.UserRole;
-import com.emart.user.exception.validateException;
 import com.emart.user.pojo.User;
 import com.emart.user.service.UserService;
 import com.emart.user.utils.JwtTokenUtil;
@@ -28,32 +23,32 @@ import com.emart.user.utils.Constants;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    
-    @Autowired
-    private UserDetailsService userDetailsService;
-    
+   
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     
     @Autowired
     private BuyerDao buyerDao;
-    
     @Autowired
     private SellerDao sellerDao;
+    @Autowired
+    private RoleDao roleDao;
     
     @Override
     public String login(User user) {
     	String username = user.getUsername();
     	String password = user.getPassword();
+    	String encode_pass = DigestUtils.md5DigestAsHex(password.getBytes());
 
-    	UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(authToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         //get user details by name
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        User userDetails = getUserInfo(username);
 
+        if(userDetails == null 
+        		|| !userDetails.getUserType().equals(user.getUserType())
+        		|| !encode_pass.equals(userDetails.getPassword())) {
+        	// user is not exist or the password is wrong
+        	return null;
+        }
         //generate JWT 
         String token = jwtTokenUtil.generateToken(userDetails);
         return token;
@@ -101,20 +96,50 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Long getBuyerId(String username) {
-		
-		Buyer buyer = buyerDao.findByUsername(username);
+	public User getUserInfo(String username) {
+		User user = null;
 
-		return buyer.getId();
+        //get user data from buyer table
+        Buyer buyer = buyerDao.findByUsername(username);
+        if(buyer != null) {
+        	user = new User();
+        	user.setUserId(buyer.getId());
+        	user.setUserType("0");   //0:buyer
+        	user.setUsername(buyer.getUsername());
+        	user.setPassword(buyer.getPassword());
+        	List<Role> roles = roleDao.findByBuyerId(buyer.getId());
+        	user.setAuthorities(roles);
+        } else {
+            //get user data from seller table
+            Seller seller = sellerDao.findByUsername(username);
+            if(seller != null) {
+            	user = new User();
+            	user.setUserId(seller.getId());
+            	user.setUserType("1");   //1:seller
+            	user.setUsername(seller.getUsername());
+            	user.setPassword(seller.getPassword());
+            	List<Role> roles = roleDao.findBySellerId(seller.getId());
+            	user.setAuthorities(roles);
+            }
+        }
+
+        return user;
 	}
 
-	@Override
-	public Long getSellerId(String username) {
-		Seller seller = sellerDao.findByUsername(username);
-		
-		return seller.getId();
-	}
-
+//	@Override
+//	public Long getBuyerId(String username) {
+//		
+//		Buyer buyer = buyerDao.findByUsername(username);
+//
+//		return buyer.getId();
+//	}
+//
+//	@Override
+//	public Long getSellerId(String username) {
+//		Seller seller = sellerDao.findByUsername(username);
+//		
+//		return seller.getId();
+//	}
 
 
 }

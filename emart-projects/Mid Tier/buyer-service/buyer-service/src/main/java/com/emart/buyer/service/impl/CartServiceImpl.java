@@ -29,11 +29,6 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void updateCartItems(List<CartItem> cartItemList) {
-		cartItemDao.saveAll(cartItemList);		
-	}
-
-	@Override
 	public List<CartItem> viewCartItems(Long buyerId) {
 		return cartItemDao.findByBuyerId(buyerId);
 	}

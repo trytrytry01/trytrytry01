@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -46,6 +47,9 @@ public class Item  implements Serializable {
 	 */
    	@Column(name = "seller_id" )
 	private Long sellerId;
+   	
+   	@Transient
+	private String sellerName="seller1";
 
 	/**
 	 * category id
@@ -155,18 +159,26 @@ public class Item  implements Serializable {
 		this.remarks = remarks;
 	}
 
-	@Override
-	public String toString() {
-		return "{" +
-					"id='" + id + '\'' +
-					"itemName='" + itemName + '\'' +
-					"sellerId='" + sellerId + '\'' +
-					"categoryId='" + categoryId + '\'' +
-					"subcategoryId='" + subcategoryId + '\'' +
-					"price='" + price + '\'' +
-					"description='" + description + '\'' +
-					"remarks='" + remarks + '\'' +
-				'}';
+	public String getSellerName() {
+		return sellerName;
 	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+//	@Override
+//	public String toString() {
+//		return "{" +
+//					"id='" + id + '\'' +
+//					"itemName='" + itemName + '\'' +
+//					"sellerId='" + sellerId + '\'' +
+//					"categoryId='" + categoryId + '\'' +
+//					"subcategoryId='" + subcategoryId + '\'' +
+//					"price='" + price + '\'' +
+//					"description='" + description + '\'' +
+//					"remarks='" + remarks + '\'' +
+//				'}';
+//	}
 
 }

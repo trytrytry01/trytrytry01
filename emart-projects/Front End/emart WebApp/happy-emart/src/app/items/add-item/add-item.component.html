@@ -1,0 +1,41 @@
+<div class="div-addItem">
+  <form [formGroup]="addItemForm" class="form-addItem" (ngSubmit)="onSubmit(addItemForm.value)">
+    <p *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+    </p>
+    
+    <!-- bootstrap utilities/screenreaders   -->
+    <label for="categoryId">Category</label>
+
+    <!-- <select class="col-sm-3 form-control" style="width:200px;" [(ngModel)]="courseId" name="courseId">
+      <option [ngValue]=""></option>
+      <option class="col-md-1" *ngFor="let course of courseData" [value]="course.id">{{course.courseName}}</option>
+    </select> -->
+
+
+    <select formControlName="categoryId " class="form-control">
+      <option [value]="1">Electronic</option>
+      <option [value]="2">Car</option>
+      <option [value]="3">Watch</option>
+    </select>
+
+    <label for="subcategoryId">Sub Category</label>
+    <select formControlName="subcategoryId " class="form-control">
+      <option [value]="1">Mobile</option>
+      <option [value]="2">computer</option>
+      <option [value]="3">camera</option>
+    </select>
+
+    <label for="itemName">Item Name</label>
+    <input formControlName="itemName" type="text" class="form-control">
+
+    <label for="price">Price</label>
+    <input formControlName="price" type="text" class="form-control">
+
+    <label for="stockNumber">No. of Stock Items</label>
+    <input formControlName="stockNumber" type="text" class="form-control">
+
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save & Sell Item</button>
+  </form>
+</div>

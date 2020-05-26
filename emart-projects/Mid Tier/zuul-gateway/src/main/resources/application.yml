@@ -1,0 +1,26 @@
+server:
+  port: 8000
+ 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: service-zuul
+
+zuul:
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  routes:
+    api-user:
+      path: /api-user/**
+      serviceId: service-user
+    api-buyer:
+      path: /api-buyer/**
+      serviceId: service-buyer
+    api-seller:
+      path: /api-seller/**
+      serviceId: service-seller
+      

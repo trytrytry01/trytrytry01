@@ -122,17 +122,17 @@ public class PurchaseHistory  implements Serializable {
 		this.remarks = remarks;
 	}
 
-	@Override
-	public String toString() {
-		return "{" +
-					"categoryId='" + id + '\'' +
-					"buyerId='" + buyerId + '\'' +
-					"transactionId='" + transactionId + '\'' +
-					"itemId='" + itemId + '\'' +
-					"numberOfItems='" + numberOfItems + '\'' +
-					"purchaseDatetime='" + purchaseDatetime + '\'' +
-					"remarks='" + remarks + '\'' +
-				'}';
-	}
+//	@Override
+//	public String toString() {
+//		return "{" +
+//					"categoryId='" + id + '\'' +
+//					"buyerId='" + buyerId + '\'' +
+//					"transactionId='" + transactionId + '\'' +
+//					"itemId='" + itemId + '\'' +
+//					"numberOfItems='" + numberOfItems + '\'' +
+//					"purchaseDatetime='" + purchaseDatetime + '\'' +
+//					"remarks='" + remarks + '\'' +
+//				'}';
+//	}
 
 }

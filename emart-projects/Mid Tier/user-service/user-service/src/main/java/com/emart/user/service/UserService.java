@@ -26,14 +26,20 @@ public interface UserService {
     void sellerSignUp(Seller seller);
     
 	/**
-	 * get buyerId by userName
+	 * get buyer/seller user info
 	 * @param String username
 	 */
-    Long getBuyerId(String username);
+    User getUserInfo(String username);
     
-	/**
-	 * get sellerId by userName
-	 * @param String username
-	 */
-    Long getSellerId(String username);
+//	/**
+//	 * get buyerId by userName
+//	 * @param String username
+//	 */
+//    Long getBuyerId(String username);
+//    
+//	/**
+//	 * get sellerId by userName
+//	 * @param String username
+//	 */
+//    Long getSellerId(String username);
 }

@@ -1,0 +1,26 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+     <tr style="background-color:#87ded0">
+      <th scope="col" width="20%">ItemName</th>
+      <th scope="col" width="20%">Category</th>
+      <th scope="col" width="20%">SubCategory</th>
+      <th scope="col" width="20%">Price</th>
+      <th scope="col" width="20%">stockNumber</th>
+    </tr> 
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of allItems">
+
+        <td>{{item.itemName}}</td>
+        <!-- <td>{{item.category}}</td>
+        <td>{{item.subCategory}}</td> -->
+        <td>Electronic</td>
+        <td>Mobile</td>
+        
+        <td>{{item.price}}</td>
+        <td>{{item.stockNumber}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

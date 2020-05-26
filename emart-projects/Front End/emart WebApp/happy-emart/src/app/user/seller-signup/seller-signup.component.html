@@ -1,0 +1,26 @@
+<div class="div-signUp">
+  <form [formGroup]="sellerForm" class="form-signup" (ngSubmit)="onSubmit(sellerForm.value)">
+    <h1 class="h3 mb-1 font-weight-normal">
+      welcom to register the seller of Happy Emart
+    </h1>
+
+    <p *ngFor="let alert of alerts">
+      <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+    </p>
+
+    <!-- bootstrap utilities/screenreaders   -->
+    <input formControlName="username" type="text" class="form-control" placeholder="username">
+    <input formControlName="password" type="password" class="form-control" placeholder="Password" >
+    <input formControlName="confirmPassword" type="password" class="form-control" placeholder="confirmPassword" >
+    <input formControlName="companyName" type="text" class="form-control" placeholder="company name">
+    <input formControlName="gstin" type="text" class="form-control" placeholder="GSTIN">
+    <input formControlName="contactNo" type="text" class="form-control" placeholder="contactNo">
+    <input formControlName="address" type="text" class="form-control" placeholder="postal address">  
+    <input formControlName="email" type="email" class="form-control" placeholder="email id" >
+    <input formControlName="website" type="text" class="form-control" placeholder="website" >
+    <textarea formControlName="brief" class="form-control" rows="3" cols="20" placeholder="brief about company(max 2000 characters)"></textarea>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <button  type="button" class="btn btn-outline-primary btn-block" (click)="backToLogin()">Back To Login</button>
+  </form>
+</div>

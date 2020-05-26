@@ -3,7 +3,6 @@ package com.emart.user.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.emart.user.pojo.User;
@@ -20,7 +19,9 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    private static final String CLAIM_KEY_USERNAME = "sub";
+	private static final long serialVersionUID = 1L;
+
+	private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_USERID = "userId";
 
     /**
@@ -35,25 +36,15 @@ public class JwtTokenUtil implements Serializable {
     /**
      * issue JWT
      */
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>(16);
-        claims.put( CLAIM_KEY_USERNAME, userDetails.getUsername() );
-        claims.put( CLAIM_KEY_USERID, userDetails );
+        claims.put( CLAIM_KEY_USERNAME, user.getUsername() );
+        claims.put( CLAIM_KEY_USERID, user.getUserId() );
         return Jwts.builder()
                 .setClaims( claims )
                 .setExpiration( new Date( Instant.now().toEpochMilli() + EXPIRATION_TIME  ) )
                 .signWith( SignatureAlgorithm.HS512, SECRET )
                 .compact();
-    }
-
-    /**
-     * validate JWT
-     */
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        User user = (User) userDetails;
-        String username = getUsernameFromToken( token );
-
-        return (username.equals( user.getUsername() ) && !isTokenExpired( token ));
     }
 
     /**

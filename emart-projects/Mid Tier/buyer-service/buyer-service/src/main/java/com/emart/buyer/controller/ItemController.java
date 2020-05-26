@@ -13,14 +13,14 @@ import com.emart.buyer.pojo.Result;
 import com.emart.buyer.service.ItemService;
 
 @RestController
-@RequestMapping(value="/api/items")
+@RequestMapping(value="/items")
 public class ItemController {
 	
 	@Autowired
 	private ItemService itemService;
      
     /**
-     * seller view stock 
+     * buyer seach items 
      */
     @GetMapping
     public Result searchItems(String keywords) {

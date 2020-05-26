@@ -114,15 +114,15 @@ public class CartItem  implements Serializable {
 		this.createdDateTime = createdDateTime;
 	}
 
-	@Override
-	public String toString() {
-		return "{" +
-					"id='" + id + '\'' +
-					"buyerId='" + buyerId + '\'' +
-					"itemId='" + itemId + '\'' +
-					"numberOfItems='" + numberOfItems + '\'' +
-					"createdDateTime='" + createdDateTime + '\'' +
-				'}';
-	}
+//	@Override
+//	public String toString() {
+//		return "{" +
+//					"id='" + id + '\'' +
+//					"buyerId='" + buyerId + '\'' +
+//					"itemId='" + itemId + '\'' +
+//					"numberOfItems='" + numberOfItems + '\'' +
+//					"createdDateTime='" + createdDateTime + '\'' +
+//				'}';
+//	}
 
 }

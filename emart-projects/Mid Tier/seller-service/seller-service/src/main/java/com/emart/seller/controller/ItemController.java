@@ -18,16 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 import com.emart.seller.entity.Item;
 import com.emart.seller.pojo.Result;
 import com.emart.seller.service.ItemService;
+import com.emart.seller.utils.JwtTokenUtil;
 
 @RestController
-@RequestMapping(value="/api/items")
+@RequestMapping(value="/items")
 public class ItemController {
 	
 	@Autowired
 	private ItemService itemService;
 	
-//    @Autowired
-//    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 //    
 //    private RestTemplate restTemplate = new RestTemplate();
     
@@ -45,11 +46,10 @@ public class ItemController {
     		return result;
     	}
     	
-//    	String token = request.getHeader("Authorization");    	
-//    	String sellerName = jwtTokenUtil.getUsernameFromToken(token);
-//    	String userUrl = "http://localhost:8081/api/user/seller?username=" + sellerName;
-//    	Long sellerId = restTemplate.getForObject(userUrl, Long.class);
-//    	item.setSellerId(sellerId);
+    	//get sellerId form JWT
+    	String token = request.getHeader("Authorization");
+    	Long sellerId = jwtTokenUtil.getUserIdFromToken(token);
+    	item.setSellerId(sellerId);
 
         itemService.addItem(item);
 
@@ -77,14 +77,13 @@ public class ItemController {
      * seller view stock 
      */
     @GetMapping
-    public Result getItems(Long sellerId) {
+    public Result getItems(HttpServletRequest request) {
     	
     	Result result = new Result();
     	
-//    	String token = request.getHeader("Authorization");
-//    	String sellerName = jwtTokenUtil.getUsernameFromToken(token);    	
-//    	String userUrl = "http://localhost:8081/api/user/seller?username=" + sellerName;
-//    	Long sellerId = restTemplate.getForObject(userUrl, Long.class);
+    	//get sellerId form JWT
+    	String token = request.getHeader("Authorization");
+    	Long sellerId = jwtTokenUtil.getUserIdFromToken(token);
         
         List<Item> itemList = itemService.viewItems(sellerId);
         

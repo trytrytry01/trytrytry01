@@ -20,7 +20,7 @@ import com.emart.buyer.pojo.Result;
 import com.emart.buyer.service.CartService;
 
 @RestController
-@RequestMapping(value="/api/cart")
+@RequestMapping(value="/cart")
 public class CartController {
     
     @Autowired
@@ -106,6 +106,8 @@ public class CartController {
 		if(cartItem.getNumberOfItems() == null) {
 			messages.add("numberOfItems is required!");
 		}
+		
+		result.setMessages(messages);
 
 	}
 

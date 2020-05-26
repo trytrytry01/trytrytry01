@@ -1,6 +1,8 @@
 package com.emart.user.entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-
 @Entity
 @Table ( name ="role")
-public class Role implements GrantedAuthority {
+public class Role implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,6 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    @Override
     public String getAuthority() {
         return name;
     }

@@ -14,12 +14,6 @@ public interface CartService {
     void addcartItems(CartItem cartItem);
     
 	/**
-	 * update cart items
-	 * @param List<Item> itemList
-	 */
-    void updateCartItems(List<CartItem> cartItemList);
-    
-	/**
 	 * view cart items
 	 * @param Long buyerId
 	 */
