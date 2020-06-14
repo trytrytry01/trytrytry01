@@ -130,7 +130,8 @@ VALUES
 # 3.Build the project
 * 1.build the angular project(/happy-emart)  
   `NG BUILD`
-* 2.build each micro service project  
+* 2.modify DB connect username and password for each micro service project 
+* 3.build each micro service project  
   `mvn package -Dmaven.test.skip=true`
 # 4.Run docker-compose
   `docker-compose up`
@@ -147,11 +148,21 @@ VALUES
 ## frontend:
    http://host.docker.internal:4200/
 ## backend:
-### eureka server URL:
+### eureka-server URL:
 	http://host.docker.internal:8761/
-### buyer sign up: 
+### user-service URL:
+#### buyer sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"buyer1\",\"password\":\"1234567\",\"email\":\"abc@sample.com\",\"mobile\":\"133222333392\"}" http://host.docker.internal:8000/api-user/buyer/signup
-### seller sign up: 
+#### seller sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"seller123\",\"password\":\"1234567\",\"companyName\":\"company111\",\"gstin\":\"10%\",\"brief\":\"brief111111\",\"postalAddress\":\"address a\",\"website\":\"www.123.sample.com\",\"email\":\"abc@sample.com\",\"contactNo\":\"No.12345678\"}" http://host.docker.internal:8000/api-user/seller/signup
-### buyer/seller login(userType:0(buyer) 1(seller)):
+#### buyer/seller login(userType:0(buyer) 1(seller)):
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\": \"buyer1\",\"password\": \"1234567\",\"userType\": \"0\"}" http://host.docker.internal:8000/api-user/login
+### seller-service URL:
+#### addItems:
+    curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X POST  --data "{\"itemName\":\"Oppo A 5S\",\"categoryId\":1,\"subcategoryId\":1,\"price\":1300,\"stockNumber\":150,\"description\":\"test\"}" http://host.docker.internal:8000/api-seller/items
+#### seller view items:
+	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X GET  -d "sellerId=1" http://host.docker.internal:8000/api-seller/items
+#### seller update stock:
+	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X PUT  --data "[{\"id\":1, \"price\":1000,\"stockNumber\":100}]" http://host.docker.internal:8000/api-seller/items
+#### seller delete items:
+	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X DELETE  --data "[{\"id\":1},{\"id\":2}]" http://host.docker.internal:8000/api-seller/items
