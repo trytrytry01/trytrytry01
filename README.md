@@ -1,6 +1,10 @@
-##Create DB
+#Create DB
+
+```
 CREATE DATABASE `emartdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-##Create Tables
+```
+#Create Tables
+```
 CREATE TABLE `role` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -121,23 +125,23 @@ INSERT INTO `subcategory`
 `gst`)
 VALUES
 (1,'',1,'',5);
+```
 
-
-##Build the project
+#Build the project
 --1.build the angular project(/happy-emart)
-  NG BUILD
+  `NG BUILD`
 --2.build each micro service project
   mvn package -Dmaven.test.skip=true
-##Run docker-compose
+#Run docker-compose
   docker-compose up
 
-##confirm the docker host has been added to the hosts file  
+#confirm the docker host has been added to the hosts file  
 (C:\Windows\System32\drivers\etc\hosts)
     # Added by Docker Desktop
     192.168.1.109 host.docker.internal
     192.168.1.109 gateway.docker.internal
 
-##URL
+#URL
   frontend:
        http://localhost:4200/
   backend:
