@@ -145,24 +145,25 @@ VALUES
 ```
 
 # 5.URL  
-## frontend:
+## 5-1.frontend:
    http://host.docker.internal:4200/
-## backend:
-### eureka-server URL:
+## 5-2.backend:
+### 5-2-1.eureka-server URL:
 	http://host.docker.internal:8761/
-### user-service URL:
-#### buyer sign up: 
+### 5-2-2.user-service URL:
+#### 5-2-2-1.buyer sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"buyer1\",\"password\":\"1234567\",\"email\":\"abc@sample.com\",\"mobile\":\"133222333392\"}" http://host.docker.internal:8000/api-user/buyer/signup
-#### seller sign up: 
+#### 5-2-2-2.seller sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"seller123\",\"password\":\"1234567\",\"companyName\":\"company111\",\"gstin\":\"10%\",\"brief\":\"brief111111\",\"postalAddress\":\"address a\",\"website\":\"www.123.sample.com\",\"email\":\"abc@sample.com\",\"contactNo\":\"No.12345678\"}" http://host.docker.internal:8000/api-user/seller/signup
-#### buyer/seller login(userType:0(buyer) 1(seller)):
+#### 5-2-2-3.buyer/seller login(userType:0(buyer) 1(seller)):
+#### (return a JWT when login success):
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\": \"buyer1\",\"password\": \"1234567\",\"userType\": \"0\"}" http://host.docker.internal:8000/api-user/login
-### seller-service URL:
-#### addItems:
+### 5-2-3.seller-service URL:
+#### 5-2-3-1.addItems:
     curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X POST  --data "{\"itemName\":\"Oppo A 5S\",\"categoryId\":1,\"subcategoryId\":1,\"price\":1300,\"stockNumber\":150,\"description\":\"test\"}" http://host.docker.internal:8000/api-seller/items
-#### seller view items:
+#### 5-2-3-2.seller view items:
 	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X GET  -d "sellerId=1" http://host.docker.internal:8000/api-seller/items
-#### seller update stock:
+#### 5-2-3-3.seller update stock:
 	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X PUT  --data "[{\"id\":1, \"price\":1000,\"stockNumber\":100}]" http://host.docker.internal:8000/api-seller/items
-#### seller delete items:
+#### 5-2-3-4.seller delete items:
 	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X DELETE  --data "[{\"id\":1},{\"id\":2}]" http://host.docker.internal:8000/api-seller/items
