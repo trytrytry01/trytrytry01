@@ -53,15 +53,6 @@ export class ItemDetailComponent implements OnInit {
     private cartService: ShoppingCartService) { }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(
-      (param)=>{
-                  let id = param.get('iId');  
-                  this.itemService.getItem(id).subscribe((response)=> {
-                    this.item =  response;
-                  }
-                  );                                   
-                }
-    );
     let id = this.activatedRoute.snapshot.params['id'];
 
     this.itemService.getItem(id).subscribe(
@@ -75,19 +66,20 @@ export class ItemDetailComponent implements OnInit {
       }
     );
 
-    this.item = ITEM_DETAIL_dummy;
+    //this.item = ITEM_DETAIL_dummy;
     this.toggleImg(1);
   }
 
   toggleImg(index:number) {
     if(index==2) {
-      this.itemImage = this.item.image2;
+      this.itemImage = ITEM_DETAIL_dummy.image2;
     } else if(index==3) {
-      this.itemImage = this.item.image3;
+      this.itemImage = ITEM_DETAIL_dummy.image3;
     } else if(index==4) {
-      this.itemImage = this.item.image4;
+      //this.itemImage = this.item.image4;
+      this.itemImage = ITEM_DETAIL_dummy.image4;
     } else {
-      this.itemImage = this.item.image1;
+      this.itemImage = ITEM_DETAIL_dummy.image4;
     }
   }
   backToSearch() {

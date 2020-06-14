@@ -23,15 +23,15 @@ import com.emart.seller.utils.JwtTokenUtil;
 @RestController
 @RequestMapping(value="/items")
 public class ItemController {
-	
+
 	@Autowired
 	private ItemService itemService;
-	
+
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 //    
 //    private RestTemplate restTemplate = new RestTemplate();
-    
+
     /**
      * seller add items
      */
@@ -45,10 +45,11 @@ public class ItemController {
     		result.setStatusCode(HttpStatus.BAD_REQUEST.value());
     		return result;
     	}
-    	
+
     	//get sellerId form JWT
     	String token = request.getHeader("Authorization");
     	Long sellerId = jwtTokenUtil.getUserIdFromToken(token);
+    	
     	item.setSellerId(sellerId);
 
         itemService.addItem(item);

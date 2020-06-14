@@ -3,6 +3,9 @@
     <input type="text" style="width: 50%;" [(ngModel)]="searchKey">
     <button class="btn btn-primary" style="margin-left: 10px;" (click)="doSearch(searchKey)">Search</button>
   </div>
+  <p *ngFor="let alert of alerts">
+    <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+  </p>
   <div class="row" style="margin-top: 5px;">
     <label>price</label>
     <input type="text" style="width: 50px;" [(ngModel)]="priceFrom">
@@ -32,10 +35,11 @@
     <tbody>
     <tr *ngFor="let item of allItems; index as i">
         <td>
-          <img src="{{item.itemImage}}" class="mr-2 img-size">
+          <!-- <img src="{{item.itemImage}}" class="mr-2 img-size"> -->
+          <img src="./assets/img/sumsung Galaxy S7.jpg" class="mr-2 img-size">          
         </td>
         <!-- <td>${{item.price | money:3}}</td> -->
-        <td>${{item.price | money:3}}</td>
+        <td>{{item.price}}</td>
         <td>{{item.sellerName}}</td>
         <td><button class="btn btn-primary" style="margin-left: 10px;" (click)="viewDetail(item.id)">View Details</button></td>
       </tr>

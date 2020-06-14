@@ -19,7 +19,6 @@ public class JwtTokenUtil implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_USERID = "userId";
 
     /**

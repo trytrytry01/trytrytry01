@@ -4,12 +4,11 @@ import java.util.List;
 
 import com.emart.seller.entity.Item;
 
-
 public interface ItemService {
 
 	/**
 	 * proceed to save item 
-	 * @param Item item
+	 * @param ItemPojo item
 	 */
     void addItem(Item item);
     

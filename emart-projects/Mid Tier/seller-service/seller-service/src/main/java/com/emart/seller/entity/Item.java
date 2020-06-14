@@ -2,11 +2,19 @@ package com.emart.seller.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+
 import java.io.Serializable;
 
 /**
@@ -47,23 +55,22 @@ public class Item  implements Serializable {
    	@Column(name = "category_id" )
 	private Long categoryId;
    	
-	/**
-	 * category name
-	 */
-   	@Transient
-	private String categoryName;
-   	
+   	@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    private Category category;
+  	
+   	@ManyToOne(fetch=FetchType.LAZY)
+   	@JoinColumns({
+      @JoinColumn(name = "category_id", insertable = false, updatable = false),
+   	  @JoinColumn(name = "subcategory_id", insertable = false, updatable = false)
+   	})
+    private Subcategory subcategory;
+
 	/**
 	 * sub category id
 	 */
-   	@Column(name = "subcategory_id" )
+   	@Column(name = "subcategory_id")
 	private Long subcategoryId;
-   	
-	/**
-	 * sub category name
-	 */
-   	@Transient
-	private String subcategoryName;
 
 	/**
 	 * price
@@ -113,21 +120,6 @@ public class Item  implements Serializable {
 		this.sellerId = sellerId;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Long getSubcategoryId() {
-		return subcategoryId;
-	}
-
-	public void setSubcategoryId(Long subcategoryId) {
-		this.subcategoryId = subcategoryId;
-	}
 
 	public String getPrice() {
 		return price;
@@ -161,35 +153,37 @@ public class Item  implements Serializable {
 		this.remarks = remarks;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public String getSubcategoryName() {
-		return subcategoryName;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setSubcategoryName(String subcategoryName) {
-		this.subcategoryName = subcategoryName;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
+	public Long getSubcategoryId() {
+		return subcategoryId;
+	}
 
-//	@Override
-//	public String toString() {
-//		return "{" +
-//					"id='" + id + '\'' +
-//					"itemName='" + itemName + '\'' +
-//					"sellerId='" + sellerId + '\'' +
-//					"categoryId='" + categoryId + '\'' +
-//					"subcategoryId='" + subcategoryId + '\'' +
-//					"price='" + price + '\'' +
-//					"description='" + description + '\'' +
-//					"remarks='" + remarks + '\'' +
-//				'}';
-//	}
+	public void setSubcategoryId(Long subcategoryId) {
+		this.subcategoryId = subcategoryId;
+	}
+
+	public Subcategory getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(Subcategory subcategory) {
+		this.subcategory = subcategory;
+	}
+
 
 }

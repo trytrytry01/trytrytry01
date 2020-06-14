@@ -12,5 +12,11 @@ public interface ItemService {
 	 * @param String keyWords
 	 */
     List<Item> searchItems(String keyWords);
+    
+	/**
+	 * view Item Detail
+	 * @param String keyWords
+	 */
+    Item viewItemDetail(Long itemId);
 
 }

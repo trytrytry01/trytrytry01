@@ -50,8 +50,9 @@ public class CartItem  implements Serializable {
    	
 	/**
 	 * item name
+	 *  select item_name from items table by @Query sql
 	 */
-   	@Transient
+   	@Column(name = "item_name", insertable = false, updatable = false)
 	private String itemName;
    	
 	/**

@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.data.jpa.repository.Query;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -23,6 +28,7 @@ import java.util.List;
  */
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Table ( name ="items")
 public class Item  implements Serializable {
 
@@ -48,8 +54,9 @@ public class Item  implements Serializable {
    	@Column(name = "seller_id" )
 	private Long sellerId;
    	
-   	@Transient
-	private String sellerName="seller1";
+   	//select seller_name from seller table by @Query sql
+   	@Column(name = "seller_name" , insertable = false, updatable = false)
+	private String sellerName;
 
 	/**
 	 * category id
@@ -57,11 +64,19 @@ public class Item  implements Serializable {
    	@Column(name = "category_id" )
 	private Long categoryId;
    	
+   	//select category_name from category table by @Query sql
+   	@Column(name = "category_name" , insertable = false, updatable = false)
+   	private String categoryName;
+   	
 	/**
 	 * sub category id
 	 */
    	@Column(name = "subcategory_id" )
 	private Long subcategoryId;
+   	
+   	//select C.subcategory_name from subcategory table by @Query sql
+   	@Column(name = "subcategory_name" , insertable = false, updatable = false)
+   	private String subCategoryName;
 
 	/**
 	 * price
@@ -166,6 +181,23 @@ public class Item  implements Serializable {
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
 	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
+	}
+
 
 //	@Override
 //	public String toString() {

@@ -54,7 +54,8 @@ export class ItemListComponent implements OnInit {
   priceTo:string="";
   manufacturer:string="";
 
-  constructor(private itemService: ItemService,
+  constructor(
+    private itemService: ItemService,
     private router: Router) {}
 
   ngOnInit() {}
@@ -107,6 +108,10 @@ export class ItemListComponent implements OnInit {
 
   viewDetail(itemId:string) {
     this.router.navigate(['/item-detail/'+itemId]);
+  }
+
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
 }

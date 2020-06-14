@@ -27,7 +27,7 @@ export class ItemService {
            'Authorization': sessionStorage.getItem('token')                    
            })
         };
-        return this.http.get(`${environment.baseUrl}/api-buyer/item/`+itemId, httpOptions);
+        return this.http.get(`${environment.baseUrl}/api-buyer/items/`+itemId, httpOptions);
     }
 
     //seller to add item

@@ -1,19 +1,35 @@
-version: '2'
+version: '3'
+
 services:
-  db:
-    image: postgres:9.4.5
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-  backend:
-    build: backend/.
-    ports: 
-      - "8080:8080"
+  front-end:
+    build: Front End/emart WebApp/happy-emart/.
+    ports:
+      - "4200:80"
+  eureka-server:
+    build: Mid Tier/eureka-server/eureka-server/.
+    ports:
+      - "8761:8761"
+  zuul-gateway:
+    build: Mid Tier/zuul-gateway/zuul-gateway/.
+    ports:
+      - "8000:8000"
     depends_on:
-      - db
-  frontend:
-    build: frontend/.
-    ports: 
-      - "80:80"
-    depends_on: 
-      - backend
+      - eureka-server
+  user-service:
+    build: Mid Tier/user-service/user-service/.
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+  seller-service:
+    build: Mid Tier/seller-service/seller-service/.
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+  buyer-service:
+    build: Mid Tier/buyer-service/buyer-service/.
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-server
