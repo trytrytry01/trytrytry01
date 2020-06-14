@@ -50,8 +50,9 @@ import java.util.List;
    	
 	/**
 	 * item name
+	 *  select item_name from items table by @Query sql
 	 */
-   	@Transient
+   	@Column(name = &quot;item_name&quot;, insertable = false, updatable = false)
 	private String itemName;
    	
 	/**
@@ -67,52 +68,52 @@ import java.util.List;
 	private Date createdDateTime;
    	
 	public Long getId() {
-<span class="fc" id="L70">		return id;</span>
+<span class="fc" id="L71">		return id;</span>
 	}
 
 	public void setId(Long id) {
-<span class="fc" id="L74">		this.id = id;</span>
-<span class="fc" id="L75">	}</span>
+<span class="fc" id="L75">		this.id = id;</span>
+<span class="fc" id="L76">	}</span>
 
 	public Long getBuyerId() {
-<span class="fc" id="L78">		return buyerId;</span>
+<span class="fc" id="L79">		return buyerId;</span>
 	}
 
 	public void setBuyerId(Long buyerId) {
-<span class="fc" id="L82">		this.buyerId = buyerId;</span>
-<span class="fc" id="L83">	}</span>
+<span class="fc" id="L83">		this.buyerId = buyerId;</span>
+<span class="fc" id="L84">	}</span>
 
 	public Long getItemId() {
-<span class="fc" id="L86">		return itemId;</span>
+<span class="fc" id="L87">		return itemId;</span>
 	}
 
 	public void setItemId(Long itemId) {
-<span class="fc" id="L90">		this.itemId = itemId;</span>
-<span class="fc" id="L91">	}</span>
+<span class="fc" id="L91">		this.itemId = itemId;</span>
+<span class="fc" id="L92">	}</span>
 
 	public String getItemName() {
-<span class="fc" id="L94">		return itemName;</span>
+<span class="fc" id="L95">		return itemName;</span>
 	}
 
 	public void setItemName(String itemName) {
-<span class="fc" id="L98">		this.itemName = itemName;</span>
-<span class="fc" id="L99">	}</span>
+<span class="fc" id="L99">		this.itemName = itemName;</span>
+<span class="fc" id="L100">	}</span>
 
 	public Integer getNumberOfItems() {
-<span class="fc" id="L102">		return numberOfItems;</span>
+<span class="fc" id="L103">		return numberOfItems;</span>
 	}
 
 	public void setNumberOfItems(Integer numberOfItems) {
-<span class="fc" id="L106">		this.numberOfItems = numberOfItems;</span>
-<span class="fc" id="L107">	}</span>
+<span class="fc" id="L107">		this.numberOfItems = numberOfItems;</span>
+<span class="fc" id="L108">	}</span>
 
 	public Date getCreatedDateTime() {
-<span class="fc" id="L110">		return createdDateTime;</span>
+<span class="fc" id="L111">		return createdDateTime;</span>
 	}
 
 	public void setCreatedDateTime(Date createdDateTime) {
-<span class="fc" id="L114">		this.createdDateTime = createdDateTime;</span>
-<span class="fc" id="L115">	}</span>
+<span class="fc" id="L115">		this.createdDateTime = createdDateTime;</span>
+<span class="fc" id="L116">	}</span>
 
 //	@Override
 //	public String toString() {

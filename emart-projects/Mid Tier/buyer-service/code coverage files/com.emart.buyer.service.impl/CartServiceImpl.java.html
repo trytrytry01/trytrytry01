@@ -35,13 +35,13 @@ import com.emart.buyer.service.CartService;
 
 	@Override
 	public void deleteCartItems(Long id) {
-<span class="fc" id="L38">		cartItemDao.deleteById(id);;</span>
+//		cartItemDao.deleteById(id);;
 <span class="fc" id="L39">	}</span>
 
 	@Override
 	public void checkoutItems(List&lt;CartItem&gt; cartItemList, Long transactionId) {
 		// delete cart item list
-<span class="fc" id="L44">		cartItemDao.deleteAll(cartItemList);</span>
+//		cartItemDao.deleteAll(cartItemList);
 		
 		//save Purchase History
 <span class="fc" id="L47">    	List&lt;PurchaseHistory&gt; purchaseHistoryList = new ArrayList&lt;PurchaseHistory&gt;();</span>
