@@ -128,28 +128,30 @@ VALUES
 ```
 
 #Build the project
---1.build the angular project(/happy-emart)
+--1.build the angular project(/happy-emart)  
   `NG BUILD`
---2.build each micro service project
-  mvn package -Dmaven.test.skip=true
+--2.build each micro service project  
+  `mvn package -Dmaven.test.skip=true`
 #Run docker-compose
-  docker-compose up
+  `docker-compose up`
 
 #confirm the docker host has been added to the hosts file  
 (C:\Windows\System32\drivers\etc\hosts)
-    # Added by Docker Desktop
-    192.168.1.109 host.docker.internal
-    192.168.1.109 gateway.docker.internal
+```
+    # Added by Docker Desktop  
+    192.168.1.109 host.docker.internal  
+    192.168.1.109 gateway.docker.internal  
+```
 
-#URL
-  frontend:
-       http://localhost:4200/
-  backend:
-       --eureka server URL:
-	       http://localhost:8761/
-       --buyer sign up: 
-		   curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"buyer1\",\"password\":\"1234567\",\"email\":\"abc@sample.com\",\"mobile\":\"133222333392\"}" http://host.docker.internal:8000/api-user/buyer/signup
-       --seller sign up: 
-	       curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"seller123\",\"password\":\"1234567\",\"companyName\":\"company111\",\"gstin\":\"10%\",\"brief\":\"brief111111\",\"postalAddress\":\"address a\",\"website\":\"www.123.sample.com\",\"email\":\"abc@sample.com\",\"contactNo\":\"No.12345678\"}" http://host.docker.internal:8000/api-user/seller/signup
-	  --buyer/seller login(userType:0(buyer) 1(seller)):
-	       curl -H "Content-Type: application/json" -X POST  --data "{\"username\": \"buyer1\",\"password\": \"1234567\",\"userType\": \"0\"}" http://host.docker.internal:8000/api-user/login
+#URL  
+##frontend:
+       `http://localhost:4200/`
+##backend:
+###eureka server URL:
+	       `http://localhost:8761/`
+       ###buyer sign up: 
+		   `curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"buyer1\",\"password\":\"1234567\",\"email\":\"abc@sample.com\",\"mobile\":\"133222333392\"}" http://host.docker.internal:8000/api-user/buyer/signup`
+       ###seller sign up: 
+	       `curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"seller123\",\"password\":\"1234567\",\"companyName\":\"company111\",\"gstin\":\"10%\",\"brief\":\"brief111111\",\"postalAddress\":\"address a\",\"website\":\"www.123.sample.com\",\"email\":\"abc@sample.com\",\"contactNo\":\"No.12345678\"}" http://host.docker.internal:8000/api-user/seller/signup`
+	   ###buyer/seller login(userType:0(buyer) 1(seller)):
+	       `curl -H "Content-Type: application/json" -X POST  --data "{\"username\": \"buyer1\",\"password\": \"1234567\",\"userType\": \"0\"}" http://host.docker.internal:8000/api-user/login`
