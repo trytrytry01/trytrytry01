@@ -124,7 +124,7 @@ INSERT INTO `subcategory`
 `brief_details`,
 `gst`)
 VALUES
-(1,'',1,'',5);
+(1,'Mobile',1,'',5);
 ```
 
 # 3.Build the project
@@ -145,13 +145,13 @@ VALUES
 
 # 5.URL  
 ## frontend:
-   http://localhost:4200/
+   http://host.docker.internal:4200/
 ## backend:
-* eureka server URL:
-	http://localhost:8761/
-* buyer sign up: 
+### eureka server URL:
+	http://host.docker.internal:8761/
+### buyer sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"buyer1\",\"password\":\"1234567\",\"email\":\"abc@sample.com\",\"mobile\":\"133222333392\"}" http://host.docker.internal:8000/api-user/buyer/signup
-* seller sign up: 
+### seller sign up: 
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\":\"seller123\",\"password\":\"1234567\",\"companyName\":\"company111\",\"gstin\":\"10%\",\"brief\":\"brief111111\",\"postalAddress\":\"address a\",\"website\":\"www.123.sample.com\",\"email\":\"abc@sample.com\",\"contactNo\":\"No.12345678\"}" http://host.docker.internal:8000/api-user/seller/signup
-* buyer/seller login(userType:0(buyer) 1(seller)):
+### buyer/seller login(userType:0(buyer) 1(seller)):
 	curl -H "Content-Type: application/json" -X POST  --data "{\"username\": \"buyer1\",\"password\": \"1234567\",\"userType\": \"0\"}" http://host.docker.internal:8000/api-user/login
