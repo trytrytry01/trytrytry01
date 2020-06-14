@@ -161,9 +161,20 @@ VALUES
 ### 5-2-3.seller-service URL:
 #### 5-2-3-1.addItems:
     curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X POST  --data "{\"itemName\":\"Oppo A 5S\",\"categoryId\":1,\"subcategoryId\":1,\"price\":1300,\"stockNumber\":150,\"description\":\"test\"}" http://host.docker.internal:8000/api-seller/items
-#### 5-2-3-2.seller view items:
+#### 5-2-3-2.seller view items stock:
 	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X GET  -d "sellerId=1" http://host.docker.internal:8000/api-seller/items
 #### 5-2-3-3.seller update stock:
 	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X PUT  --data "[{\"id\":1, \"price\":1000,\"stockNumber\":100}]" http://host.docker.internal:8000/api-seller/items
 #### 5-2-3-4.seller delete items:
 	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X DELETE  --data "[{\"id\":1},{\"id\":2}]" http://host.docker.internal:8000/api-seller/items
+### 5-2-4.buyer-service URL:
+#### 5-2-4-1.buyer addCartItems:
+    curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X POST  --data "{\"buyerId\":1,\"itemId\":1,\"categoryId\":1,\"numberOfItems\":2}" http://host.docker.internal:8000/api-buyer/cart
+#### 5-2-4-2.buyer search items:
+	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X GET  -d "keywords=Oppo" http://host.docker.internal:8000/api-buyer/items
+#### 5-2-4-3.buyer checkoutItems:
+	curl -H "Content-Type: application/json;Authorization: xxxxxxJWTxxxxxxx" -X PUT  --data "[{\"id\":1,\"buyerId\":3,\"itemId\":1,\"numberOfItems\":5}]" http://host.docker.internal:8000/api-buyer/cart/checkout/1
+#### 5-2-4-4.buyer view CartItems:
+	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X GET  http://host.docker.internal:8000/api-buyer/cart/1
+#### 5-2-4-5.buyer delete CartItems:
+	curl -H "Authorization: xxxxxxJWTxxxxxxx" -X DELETE  http://host.docker.internal:8000/api-buyer/cart/1
